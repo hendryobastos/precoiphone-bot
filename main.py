@@ -74,4 +74,5 @@ def main():
     app.run_polling()
 
 if name == "__main__":
+    app.run_polling()
     main()
