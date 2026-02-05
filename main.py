@@ -62,7 +62,16 @@ async def analisar(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await update.message.reply_text(msg)
 
-app = ApplicationBuilder().token(TOKEN).build()
-app.add_handler(CommandHandler("start", start))
-app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, analisar))
-app.run_polling()
+def main():
+    if not TOKEN:
+        raise ValueError("BOT_TOKEN não encontrado nas variáveis do Railway")
+
+    app = ApplicationBuilder().token(TOKEN).build()
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, analisar))
+
+    print("🤖 Bot rodando...")
+    app.run_polling()
+
+if name == "__main__":
+    main()
